@@ -1,0 +1,89 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+  public:
+  int data;
+  Node *next;
+  
+  Node(int data)
+  {
+      this->data = data;
+      next = NULL;
+  }
+};
+
+class Stack
+{
+  public:
+  Node *head = NULL;
+  int size;
+
+//function to add the element into the stack
+  void push(int data)
+  {
+      Node *p = new Node(data);
+      if(head == NULL)
+      {
+            head = p;
+      }
+      else
+      {
+            p->next = head;
+            head = p;
+      }
+  }
+//function to remove the element from the stack
+  void pop()
+  {
+      if(head != NULL)
+      {
+       // int top = head->data; // if want to see the popped element
+        Node *t = head;
+        head=head->next;
+        t->next = NULL;
+        delete(t);
+      }
+      else
+      {
+          cout<<"stack is empty"<<endl;
+      }
+  }
+//function to find element at top of the stack  
+int peek()
+  {
+      if(head != NULL)
+      {
+          int top = head->data;
+          return top;
+      }
+      else
+      {
+          cout<<"stack is empty"<<endl;
+          return -1;
+      }  
+  }
+
+//function to check if the stack is empty or not
+  bool IsEmpty()
+  {
+    if(head == NULL)
+        return true;
+    return false;
+  }
+};
+
+int main()
+{
+    cout<<"Hello World";
+    Stack st;
+    st.push(1);
+    st.push(2);
+    st.pop();
+    cout<<"\nTop element of the stack is "<<st.peek()<<endl;
+    st.push(3);
+    st.pop();
+    cout<<st.IsEmpty();
+    return 0;
+}
